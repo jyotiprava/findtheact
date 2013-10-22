@@ -120,6 +120,8 @@ if($_SESSION['data'])
 $data=$_SESSION['data'];
 //get the type of login user from session data
 $x=$data['type'];
+//if user type=2 then act person login
+//if user type=1 then act agency login
 //if login user type is 2 then load the actperson home view page
 if($x==2)
 {
@@ -157,21 +159,32 @@ function addact()
 	}
 
 
-/*****************************  Act manager Agency Change******************************/
+/*****************************  Act person Change act agency ******************************/
 
 
 function agencychange()
 {
+//if session data is isset
 if($_SESSION['data'])
 {
+//store session data in a variable data
 $data=$_SESSION['data'];
+//get the login user emailid from data variable and store in a variable x
 $x=$data['email'];
 
 }
+//store the email value in eamilvalue
+
 	$data['emailvalue']=$x;
+//create the instance of the allactagency model
 
 $this->load->model('allacts','',TRUE);
+//call the allactdetails function from allacts model by passing the login user email
+// then store all the actagency details in allacts variable
+
 $data['allacts'] = $this->allacts->allactdetails($x);
+
+//load the agency change view page  by passing the variable $data
 
 $this->template->load('usertemplate', 'actmanager/agencychange',$data);
 
