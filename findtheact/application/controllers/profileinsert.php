@@ -11,10 +11,12 @@ class Profileinsert extends CI_controller{
 		$config['max_size']	= '10000';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
+		
+		//load the upload library
 
 		$this->load->library('upload', $config);
 		
-		//echo $config['upload_path'];
+		//if image is not uploaded then give an error message
 		if ( ! $this->upload->do_upload())
 		{
 		//echo "ifff";
@@ -24,16 +26,17 @@ var_dump($error);
 		}
 		else
 		{
-		//echo "else";
+		//else uoload the image in upload folder
 	$data = array('upload_data' => $this->upload->data());
-	//var_dump($data);
+	//Create an instance of the insert profile model
 	$this->load->model('insertprofile');
-
+	//if isest submit then call the process function of insertprofile modeel
 			if($this->input->post('submit'))
 			{
 	
 				$this->insertprofile->process();                
 			}
+			//redirect the page to add act person profile
 redirect('userlogin/addactmanager');
 }
 
