@@ -8,6 +8,7 @@
         function process($email){
 		
 		$chk='';
+		  // Grab the values from the form POST
 		$val=$_FILES['userfile']['name'];
 		$name = $this->input->post('name');
 		$eventname = $this->input->post('eventname');
@@ -21,10 +22,12 @@
 		
 		foreach($skill as $sk)
 		{
-		//$data['skill']=$data['skill'].$sk.',';
+	
 		$chk=$chk.$sk.',';
 		
 		}
+		
+		//store all the post variables in an array 
 		
 		
 		$insert = array(
@@ -38,6 +41,8 @@
 						'descp'=>$descp,
 						'image'=>$image_process
                     );
+                    
+                   //then built the insert query for inserting all data which is resides in insert array in the act table
 					
 					
                    $this->db->insert('act',$insert);
