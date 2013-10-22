@@ -401,11 +401,13 @@ $data=$_SESSION['data'];
 	
 function cpassword1()
 	{
-	
+ // Create an instance of the acgency change password model
 	$this->load->model('cpassword1');
+ // Grab the email and password from the form POST
 $email = $this->input->post('email');
 $pass = $this->input->post('pass');
 $cpass = $this->input->post('cpass');
+//call the cpassw function of change password model
 $data['value']=$this->cpassword1->cpassw($email,$pass,$cpass);
 
 	
@@ -438,10 +440,12 @@ function notification()
 function logout()
 
 	{
+//if session ll destroy then reditect the page to userlogin page
  if(session_destroy())
 {
  redirect('userlogin/index', 'refresh');
 }
+//else giving an session exist message
 else
 {
 echo "session exist";
