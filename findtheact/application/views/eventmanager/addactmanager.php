@@ -2,13 +2,13 @@
 <script type="text/javascript">
 function getsubskill(val)
 {
-	//alert(val);
+	//call ajax to get all the subskills of the selected skill by passing skill id
     $.post('<?php echo base_url()?>index.php/pages/subcategory',
 	{ 'id':val},
 	function(result) {
-//alert(result);
+//get the result and print the result in subskill field
 	$('#profile_subcategory').html(result);
-	//alert(4);
+
 	}
 	);
 }
@@ -63,6 +63,7 @@ Examples: "The Moondance Band", "Elite Catering"</span>
                                         <select class="textbox" name="category" style="width: 220px;"  onchange="getsubskill(this.value);">
                                 <option value="">Click to browse Categories</option>
                                 <?php
+                                //get all the skills from skill model
 					foreach($skills as $row)
 											
 					{
