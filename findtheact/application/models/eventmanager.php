@@ -54,10 +54,15 @@ Class Eventmanager extends CI_Model
  
  
 /***************************** get all the distinct location ******************************/
+
   function locations()
  {
+ 	
+//build a query to get all the distinct location of all the at person from profile table
    
    $query = $this -> db -> query('select distinct(address) as loc from profile');
+   
+ //return the result array
 
    return $query->result();
  }
