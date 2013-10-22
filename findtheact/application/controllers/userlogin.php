@@ -22,11 +22,15 @@ class Userlogin extends CI_controller{
 	function save()
 {
 
+// Create an instance of the addreg model
 
 $this->load->model('Addreg');
 
+//if submit is isset then call the process function of addreg model
+
 if($this->input->post('submit'))
 {
+
 
 $this->Addreg->process();
 //   --------Email conformation-----------//
@@ -48,6 +52,8 @@ $config['wordwrap'] = TRUE;
 	 
 	 //-------------Email send ends---------------//
  }
+ 
+// redirect to the userlogin view
 redirect('userlogin'); 
     
     
