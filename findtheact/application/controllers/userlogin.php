@@ -360,18 +360,22 @@ $data['allacts'] = $this->act->allact($dataval);
 
 
 
-/****************************************  view all event notyificaton of event manager   ***************************************/
+/****************************************  view all event notyificaton of act person   ***************************************/
 	
 	
 	function eventnotification()
 	{
+		//if session is isset
 	if($_SESSION['data'])
 {
+	//store the sesion data in a variable named as data
 $data=$_SESSION['data'];
+//get the user email from session
 $x=$data['email'];
 
 }
 	$data['emailvalue']=$x;
+//load the eventnotification view page
 $this->template->load('usertemplate1', 'eventmanager/eventnotification',$data);
 	
 	
@@ -381,15 +385,17 @@ $this->template->load('usertemplate1', 'eventmanager/eventnotification',$data);
 /****************************************   end   ****************************************************/	
 
 
-/****************************************  event  manager change password   ***************************************/
+/****************************************  act agency  change password   ***************************************/
 	
 function changepassword()
 	{
+//if session is isset then store the session value in a variable $data
 	    if($_SESSION['data'])
 {
 $data=$_SESSION['data'];
 
 	}
+//load act agency change password view page
 	$this->template->load('usertemplate1', 'eventmanager/cpassword1',$data);
 	}
 	
