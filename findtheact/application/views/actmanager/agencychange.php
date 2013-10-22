@@ -30,15 +30,15 @@ text-align:left;
 			<th>Action</th>
 		</tr>
 		<?php
-		
+		//get the login user emialid and store in a variable $val
 		$val=$emailvalue;
 		
-	
+	//built a query to get the act agency emailid under which this act person resides
 		$query1 = $this -> db -> get_where('profile',array('email ='=>$val));
 	    $row = $query1->row(); 
 		$agencyid=$row->added_by;
 		
-		
+		//get the act agency name by built a query from registration table
 		$query2 = $this -> db -> get_where('registration',array('email'=>$agencyid));
 	    $row2 = $query2->row(); 
 		$agencyname=$row2->username;
@@ -46,12 +46,18 @@ text-align:left;
 		?>
 		<tr><td colspan="2">Current Agency : <?php echo $agencyname?> </td></tr>
 		<?php
+		//get all the act person details from allacts model page
+		//foreach act person get the details 
 		foreach($allacts as $row)
 		{
 		$gemail=$row->email;
+		//built a query to get the status of agency change of the login act person
 		$q=mysql_query("select `status` from `agency_change` where `act_id`='$val' and `under_agency`='$agencyid' and `applied_to`='$gemail'");
 		$r=mysql_fetch_array($q);
 		$status=$r['status'];
+		
+		//if status=0 then the act person applied to change the act agency
+	
 		
 		if(isset($status))
 		{
@@ -66,6 +72,7 @@ text-align:left;
 		</tr>
 		<?php
 		}
+			//if status=1 then approved by the applied act person
 		if($status==1)
 		{
 		?>
@@ -80,6 +87,7 @@ text-align:left;
 		<?php
 		}
 		}
+			//else the act person cannt apply to change the act agency
 		else
 		{
 		?>
