@@ -66,7 +66,7 @@ redirect('userlogin');
 	
 	public function userlog(){
 	
-        // Load the model
+        // Create an instance of the userlogin model
         $this->load->model('userlogin_model');
         // Validate the user can login
         $result = $this->userlogin_model->validate();
@@ -74,16 +74,16 @@ redirect('userlogin');
 		
         // Now we verify the result
         if(! $result){
-            // If user did not validate, then show them login page again
-            //$this->index();
+            // If user did not validate, then show an error message
+           
 			 
 			echo "Invalid username/password";
         }else{
-            // If user did validate, 
-            // Send them to members area
-        //redirect('home');
+            // If user did validate,then foreach result 
+            
 		 foreach($result as $row)
      {
+     	//store username,type,email and password store in an  $sess_array
        $sess_array = array(
          
          'username' => $row->username,
@@ -91,11 +91,14 @@ redirect('userlogin');
 		 'email'=>$row->email,
 		  'pass'=>$row->pwd
        );
+       
+     
+     // store $sess_array data in sesssion
 	   $_SESSION['data']=$sess_array;
 	  
 	   }
 	  
-       
+       //then redirect to checklogin function of userlogin controller 
 	   
 		redirect('userlogin/chklogin');
         }    
@@ -105,21 +108,26 @@ redirect('userlogin');
 
 
 
-/**************************************** check login and redirect tpo corresponding user page   **************************************/
+/**************************************** check login and redirect to corresponding user page   **************************************/
 
 function chklogin()
 {
+
+//if session data is not null 	
 if($_SESSION['data'])
 {
+//assign the session data in a variable $data
 $data=$_SESSION['data'];
+//get the type of login user from session data
 $x=$data['type'];
-
+//if login user type is 2 then load the actperson home view page
 if($x==2)
 {
 
 $this->template->load('usertemplate', 'actmanager/actmanager_homepage',$data); 
 
 }
+//else load act agency home view page
 else
 {
 
