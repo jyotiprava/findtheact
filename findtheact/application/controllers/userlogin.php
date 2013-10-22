@@ -300,23 +300,29 @@ $this->template->load('usertemplate', 'actmanager/diary',$data);
 
 
 	
-/***************************** Add Act manager Details******************************/
+/***************************** Add Act person Details******************************/
 function addactmanager()
 	{
+		//if isset session data then store it in a variable called $data
 	
 	if($_SESSION['data'])
 {
 $data=$_SESSION['data'];
+//get the login user email value from the data
 $x=$data['email'];
 
 }
+//create the instance of the event model and store all the event details in events array
 	$this->load->model('event','',TRUE);
 	$data['events'] = $this->event->events(); 
+//create the instance of the skill model and store all the skills in skills array
 	$this->load->model('skill','',TRUE);
 	$data['skills'] = $this->skill->skills();
+//create the instance of the eventmanager model and store all the location details  of all the act persons in location array
 	 $this->load->model('eventmanager','',TRUE);
 	$data['locations'] = $this->eventmanager->locations();
 	$data['emailvalue']=$x;
+//load the add act erson view page by passing all the data stored in $data array
 	$this->template->load('usertemplate1', 'eventmanager/addactmanager',$data); 
 	 
 	
@@ -329,17 +335,20 @@ $x=$data['email'];
 	
 	function viewact()
 	{
+//if isset session then store the session value in a variable
 	if($_SESSION['data'])
 {
 $data=$_SESSION['data'];
+//get the email value from the data
 $x=$data['email'];
 
 }
 	$dataval['emailvalue']=$x;
+//create an instance of the act model
 	$this->load->model('act','',TRUE);
 $data['allacts'] = $this->act->allact($dataval);
 
-
+//load view all act deatils view page
 	$this->template->load('usertemplate1', 'eventmanager/viewact',$data); 
 	
 	
