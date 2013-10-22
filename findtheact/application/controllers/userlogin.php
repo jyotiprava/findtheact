@@ -199,13 +199,18 @@ $this->template->load('usertemplate', 'actmanager/agencychange',$data);
 
 function addvedio()
 {
+	//if session data is isset
 if($_SESSION['data'])
 {
+	//store session data in a variable data
 $data=$_SESSION['data'];
+//store the email value in variable $x
 $x=$data['email'];
 
 }
+//store the email value in eamilvalue
 $data['emailvalue']=$x;
+//load add vedio view page by passing all the data array
 $this->template->load('usertemplate', 'actmanager/addvedio',$data);
 
 }
@@ -219,12 +224,13 @@ $this->template->load('usertemplate', 'actmanager/addvedio',$data);
 
 function editprofile()
 	{
-	
+	//if session data is set then store it in a variable 
 	if($_SESSION['data'])
 {
 $data=$_SESSION['data'];
 
 	}
+	//load the act person editprofile view page by passing the data array 
 
 	$this->template->load('usertemplate', 'actmanager/editprofile',$data);
 
@@ -238,21 +244,28 @@ $data=$_SESSION['data'];
 	
 function change_password()
 	{
+		//if session is set
 	    if($_SESSION['data'])
 {
+	//store session data in data variable
 $data=$_SESSION['data'];
 
 	}
+	//load act person changepassword view page
 	$this->template->load('usertemplate', 'actmanager/cpassword',$data);
 	}
 	
 function cpassword()
 	{
+//get the instance of the change password model
 	
 	$this->load->model('cpassword');
+	
+//Grab the email and new password and confirm password from the form POST
 $email = $this->input->post('email');
 $pass = $this->input->post('pass');
 $cpass = $this->input->post('cpass');
+//call the cpassw function from change password model to change the existing password
 $data['value']=$this->cpassword->cpassw($email,$pass,$cpass);
 
 	
@@ -268,13 +281,17 @@ $data['value']=$this->cpassword->cpassw($email,$pass,$cpass);
 
 function diary()
 {
+	//if session is isset then store the session data in a variable
 if($_SESSION['data'])
 {
 $data=$_SESSION['data'];
+//store the session email value in a variable x
 $x=$data['email'];
 
 }
 $data['emailvalue']=$x;
+
+//load the act person diary view page by passing all the data in data array
 
 $this->template->load('usertemplate', 'actmanager/diary',$data);
 }
