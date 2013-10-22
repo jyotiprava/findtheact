@@ -22,8 +22,11 @@ class Userlogin extends CI_controller{
 	function save()
 {
 
+/************************************* Create an instance of the addregistration model ************************************/
 
 $this->load->model('Addreg');
+
+/******************************************* if submit is isset then process function is called from addreg model *******************************************/
 
 if($this->input->post('submit'))
 {
@@ -48,6 +51,11 @@ $config['wordwrap'] = TRUE;
 	 
 	 //-------------Email send ends---------------//
  }
+ 
+ 
+ /*********************************** process function end ********************************************/
+ 
+ /*********************************** redirect the page to userlogin index page ***********************/
 redirect('userlogin'); 
     
     
