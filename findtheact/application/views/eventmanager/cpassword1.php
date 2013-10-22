@@ -2,23 +2,30 @@
 <script type="text/javascript">
 function deleterecord()
 {
+//Grab the existing password,new password,confirm new password and session email id from the form POST 
     var pass=$('#npass').val();
     var cpass=$('#rnpass').val();
     var cpass1=$('#cpass').val();
     var email=$('#cemail').val();
+    //if new password is null then give an new password cannt blank message
     if (pass=='') {
         alert("New Password Cannot Be Blank.");
     }
     else{
+    //if new password and cofirm new password not equal then give an erro message for mismathch password
     if (pass!=cpass) {
        alert("New Password & Confirm Password Are Not Identical");
      }
 	else{
+	//call an ajax to change the existing password of the login user 
+	//call the cpassword1 function of userlogon controller passing existing password,new password and cofirm new password value
 					    $.post('<?php echo base_url()?>index.php/userlogin/cpassword1',
 						     { 'email':email,'pass':pass ,'cpass':cpass1},
     
 	
 						    function(result) {
+						    
+						    //if the result is sucess then alert succesfully password change.
 														    
 							    alert(result);
 							    
